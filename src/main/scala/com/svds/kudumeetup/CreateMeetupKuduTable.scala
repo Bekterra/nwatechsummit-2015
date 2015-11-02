@@ -6,7 +6,7 @@ import org.kududb.{Schema, Type, ColumnSchema}
 import org.kududb.ColumnSchema.ColumnSchemaBuilder
 import org.kududb.client.{PartialRow, CreateTableBuilder, KuduClient}
 
-object CreateKuduTable {
+object CreateMeetupKuduTable {
   def main(args:Array[String]): Unit = {
     if (args.length == 0) {
       println("{kuduMaster} {tableName}")
@@ -45,28 +45,6 @@ object CreateKuduTable {
       kuduClient.deleteTable(tableName)
     }
     val createTableBuilder = new CreateTableBuilder
-/*    val splitRow = schema.newPartialRow()
-    splitRow.addString("event_id", "")
-    createTableBuilder.addSplitRow(splitRow)
-    splitRow.addString("event_id", "1")
-    createTableBuilder.addSplitRow(splitRow)
-    splitRow.addString("gamer_id", "2")
-    createTableBuilder.addSplitRow(splitRow)
-    splitRow.addString("gamer_id", "3")
-    createTableBuilder.addSplitRow(splitRow)
-    splitRow.addString("gamer_id", "4")
-    createTableBuilder.addSplitRow(splitRow)
-    splitRow.addString("gamer_id", "5")
-    createTableBuilder.addSplitRow(splitRow)
-    splitRow.addString("gamer_id", "6")
-    createTableBuilder.addSplitRow(splitRow)
-    splitRow.addString("gamer_id", "7")
-    createTableBuilder.addSplitRow(splitRow)
-    splitRow.addString("gamer_id", "8")
-    createTableBuilder.addSplitRow(splitRow)
-    splitRow.addString("gamer_id", "9")
-    createTableBuilder.addSplitRow(splitRow)
-*/
     println("Creating Table")
     kuduClient.createTable(tableName, schema, createTableBuilder)
     println("Created Table")

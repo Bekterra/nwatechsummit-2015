@@ -6,7 +6,7 @@ import org.kududb.{Schema, Type, ColumnSchema}
 import org.kududb.ColumnSchema.ColumnSchemaBuilder
 import org.kududb.client.{PartialRow, CreateTableBuilder, KuduClient}
 
-object CreateKuduTable {
+object CreatePredictionKuduTable {
   def main(args:Array[String]): Unit = {
     if (args.length == 0) {
       println("{kuduMaster} {tableName}")
@@ -35,4 +35,4 @@ object CreateKuduTable {
   }
 }
 
-CreateKuduTable.main(Array("localhost","kudu_meetup_rsvps_predictions"))
+//CreatePredictionKuduTable.main(Array("localhost","kudu_meetup_rsvps_predictions"))
