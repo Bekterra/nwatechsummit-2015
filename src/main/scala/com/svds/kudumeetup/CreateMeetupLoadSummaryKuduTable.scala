@@ -6,7 +6,7 @@ import org.kududb.{Schema, Type, ColumnSchema}
 import org.kududb.ColumnSchema.ColumnSchemaBuilder
 import org.kududb.client.{PartialRow, CreateTableBuilder, KuduClient}
 
-object CreateLoadSummaryKuduTable {
+object CreateMeetupLoadSummaryKuduTable {
   def main(args:Array[String]): Unit = {
     if (args.length == 0) {
       println("{kuduMaster} {tableName}")
