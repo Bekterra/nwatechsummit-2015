@@ -35,4 +35,3 @@ object CreateLoadSummaryKuduTable {
   }
 }
 
-//CreateLoadSummaryKuduTable.main(Array("localhost","kudu_meetup_rsvps_load_summary"))

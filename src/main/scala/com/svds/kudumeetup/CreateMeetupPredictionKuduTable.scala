@@ -35,4 +35,3 @@ object CreatePredictionKuduTable {
   }
 }
 
-//CreatePredictionKuduTable.main(Array("localhost","kudu_meetup_rsvps_predictions"))

@@ -49,10 +49,8 @@ object KuduMeetupStreamingPrediction {
     val numFeatures = 2
     val model = new StreamingLinearRegressionWithSGD().setInitialWeights(Vectors.zeros(numFeatures))
 
-    //val windowed_dstream = loadDataFromKafka(topics, brokerList, ssc).window(new Duration(60000), new Duration(60000))
     val dstream = loadDataFromKafka(topics, brokerList, ssc)
 
-    //val stream = windowed_dstream.transform { rdd =>
     val stream = dstream.transform { rdd =>
       val parsed1 = sqlContext.read.json(rdd)
       parsed1.registerTempTable("parsed1")
@@ -72,7 +70,6 @@ object KuduMeetupStreamingPrediction {
 
     stream.kuduForeachPartition(kuduContext, (it, kuduClient, asyncKuduClient) => {
       val table = kuduClient.openTable("kudu_meetup_rsvps_load_summary")
-      //This can be made to be faster
       val session = kuduClient.newSession()
       session.setFlushMode(FlushMode.AUTO_FLUSH_BACKGROUND)
       var upserts = 0
@@ -90,7 +87,6 @@ object KuduMeetupStreamingPrediction {
     })
     rslt_stream.kuduForeachPartition(kuduContext, (it, kuduClient, asyncKuduClient) => {
       val table = kuduClient.openTable("kudu_meetup_rsvps_predictions")
-      //This can be made to be faster
       val session = kuduClient.newSession()
       session.setFlushMode(FlushMode.AUTO_FLUSH_BACKGROUND)
       var upserts = 0
@@ -112,4 +108,3 @@ object KuduMeetupStreamingPrediction {
   }
 }
 
-//KuduMeetupStreamingPrediction.main(Array("localhost","localhost:9092"))
