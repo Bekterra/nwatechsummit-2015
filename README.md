@@ -1,72 +1,74 @@
-#Kudu Meetup Spark Streaming Example
+Kudu Meetup Spark Streaming Example
 
-#For the moment kudu-spark (from tmalaska/SparkOnKudu) is included as there are no published artifacts yet.
+For the moment kudu-spark (from tmalaska/SparkOnKudu) is included as there are no published artifacts yet.
 
-#Follow instructions to setup kudu sandbox or run against your own:
-#http://getkudu.io/docs/quickstart.html
+Follow instructions to setup kudu sandbox or run against your own:
+http://getkudu.io/docs/quickstart.html
 
-#ssh into VM:
+ssh into VM:
 ssh demo@quickstart.cloudera
 
-#Install git
+Install git:
 sudo yum install git
 
-#Clone repo
+Clone repo:
 git clone https://github.com/silicon-valley-data-science/nwatechsummit-2015.git
 
-#Install sbt:
-#http://www.scala-sbt.org/0.13/tutorial/Installing-sbt-on-Linux.html
-#From link (may need refreshed):
+Install sbt:
+http://www.scala-sbt.org/0.13/tutorial/Installing-sbt-on-Linux.html
+From link (may need refreshed):
 curl https://bintray.com/sbt/rpm/rpm | sudo tee /etc/yum.repos.d/bintray-sbt-rpm.repo
 sudo yum install sbt
 
-#Build
+Build:
 cd ~/nwatechsummit-2015
 sbt package
 
-#Download Spark 1.5.1 for Hadoop 2.6+ (http://spark.apache.org/downloads.html)
-#From link (may need refreshed):
+Download Spark 1.5.1 for Hadoop 2.6+ (http://spark.apache.org/downloads.html)
+From link (may need refreshed):
 wget http://d3kbcqa49mib13.cloudfront.net/spark-1.5.1-bin-hadoop2.6.tgz
 
-#Expand Spark into home dir:
+Expand Spark into home dir:
 tar xvf spark-1.5.1-bin-hadoop2.6.tgz
 
-#Create Kudu Tables:
+Create Kudu Tables:
 cd ~/nwatechsummit-2015/bin
 ./CreateMeetupKuduTable.sh
 ./CreateMeetupLoadSummaryKuduTable.sh
 ./CreateMeetupPredictionKuduTable.sh
 
-#Setup and start Kafka locally (or use existing install)
+Setup and start Kafka locally (or use existing install):
 http://kafka.apache.org/documentation.html#quickstart
 
-#Clone Meetup Stream Kafka Loader
+Clone Meetup Stream Kafka Loader:
 git clone https://github.com/silicon-valley-data-science/strataca-2015.git
 
-#install Maven on sandbox - http://preilly.me/2013/05/10/how-to-install-maven-on-centos/
+Install Maven on sandbox - http://preilly.me/2013/05/10/how-to-install-maven-on-centos/ :
 cd ~/strataca-2015/Building-a-Data-Platform/tailer2kafka/
 
-#Follow instructions in README (excluding kafka setup from above - inline below may need refreshed)
+Follow instructions in README (excluding kafka setup from above - inline below may need refreshed):
 mvn install
-#Start Curl to File
+
+Start Curl to File:
 nohup bin/run_curl_meetup_stream.sh &
-#Start Tail File to Kafka
+
+Start Tail File to Kafka:
 nohup bin/run_tailer2kafka.sh &
 
-#Run Streaming Prediction
+Run Streaming Prediction:
 cd ~/nwatechsummit-2015/bin
 ./RunKuduMeetupStreamingPrediction.sh
 
-#Run Raw data to Kudu
+Run Raw data to Kudu:
 ./RunKuduMeetup.sh
 
-#Open in browser: http://quickstart.cloudera:8051
-#click Tables Tab then click Each Meetup Table (for example  kudu_meetup_rsvps) to get schema for impala table
+Open in browser: http://quickstart.cloudera:8051 
+Click Tables Tab then click Each Meetup Table (for example  kudu_meetup_rsvps) to get schema for impala table
 
-#run impala-shell
+Run impala-shell:
 impala-shell
-#paste in create tables from above
-#query kudu meetup table:
+
+Paste in create tables from above thenquery kudu meetup table:
 select * from kudu_meetup_rsvps limit 2;
 select * from kudu_meetup_rsvps_predictions limit 2;
 select * from kudu_meetup_rsvps_load_summary limit 2;
