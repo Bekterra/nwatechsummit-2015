@@ -54,7 +54,7 @@ object KuduMeetupStreamingPrediction {
     val stream = dstream.transform { rdd =>
       val parsed1 = sqlContext.read.json(rdd)
       parsed1.registerTempTable("parsed1")
-      val parsed2 = sqlContext.sql("select m,cnt,mtime from (select (int(mtime/60000)-(" + current_time + "/60000 ))/1000.0 as m,count(*) as cnt,int(mtime/60000) as mtime from (select distinct * from parsed1) aa group by (int(mtime/60000)-(" + current_time + "/60000 ))/1000.0,int(mtime/60000) ) aa where cnt > 20 ")
+      val parsed2 = sqlContext.sql("select m,cnt,mtime from (select (round(mtime/60000)-(" + current_time + "/60000 ))/1000.0 as m,count(*) as cnt,round(mtime/60000) as mtime from (select distinct * from parsed1) aa group by (round(mtime/60000)-(" + current_time + "/60000 ))/1000.0,round(mtime/60000) ) aa where cnt > 20 ")
       parsed2.rdd
     }
     stream.print()
