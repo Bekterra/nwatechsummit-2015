@@ -70,7 +70,7 @@ cd ~/nwatechsummit-2015/bin
 Run Raw data to Kudu:
 `./RunKuduMeetup.sh`
 
-Go to [http://quickstart.cloudera:8051], click tables tab then click each meetup table (for example  kudu_meetup_rsvps) to get schema for impala table
+Go to http://quickstart.cloudera:8051, click tables tab then click each meetup table (for example  kudu_meetup_rsvps) to get schema for impala table
 
 Run impala-shell:
 `impala-shell`
