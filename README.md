@@ -51,10 +51,12 @@ Clone Meetup Stream Kafka Loader:
 `git clone https://github.com/silicon-valley-data-science/strataca-2015.git`
 
 Install Maven on sandbox - http://preilly.me/2013/05/10/how-to-install-maven-on-centos/ :
-`cd ~/strataca-2015/Building-a-Data-Platform/tailer2kafka/`
 
-Follow instructions in README (excluding kafka setup from above - inline below may need refreshed):
-`mvn install`
+Build Meetup Stream Kafka Loader
+```
+cd ~/strataca-2015/Building-a-Data-Platform/tailer2kafka/
+mvn install
+```
 
 Start Curl to File:
 `nohup bin/run_curl_meetup_stream.sh &`
