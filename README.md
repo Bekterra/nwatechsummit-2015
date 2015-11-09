@@ -29,11 +29,12 @@ sbt package
 ```
 
 Download Spark 1.5.1 for Hadoop 2.6+ (http://spark.apache.org/downloads.html)
-From link (may need refreshed):
-`wget http://d3kbcqa49mib13.cloudfront.net/spark-1.5.1-bin-hadoop2.6.tgz`
-
-Expand Spark into home dir:
-`tar xvf spark-1.5.1-bin-hadoop2.6.tgz`
+From link (may need refreshed) and expand into home dir:
+```
+cd ~
+wget http://d3kbcqa49mib13.cloudfront.net/spark-1.5.1-bin-hadoop2.6.tgz
+tar xvf spark-1.5.1-bin-hadoop2.6.tgz
+```
 
 Create Kudu Tables:
 ```
